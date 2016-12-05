@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Maven: com.google.code.gson:gson:2.3">
+    <archive path="C:/Users/ZUBCARZ/.m2/repository/com/google/code/gson/gson/2.3/gson-2.3.jar" />
+  </library>
+  <library name="Maven: com.sun.jersey:jersey-bundle:1.18.3">
+    <archive path="C:/Users/ZUBCARZ/.m2/repository/com/sun/jersey/jersey-bundle/1.18.3/jersey-bundle-1.18.3.jar" />
+  </library>
+  <library name="Maven: javax.ws.rs:jsr311-api:1.1.1">
+    <archive path="C:/Users/ZUBCARZ/.m2/repository/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar" />
+  </library>
+  <library name="Maven: mysql:mysql-connector-java:5.1.6">
+    <archive path="C:/Users/ZUBCARZ/.m2/repository/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar" />
+  </library>
+</eclipse-userlibraries>
+
