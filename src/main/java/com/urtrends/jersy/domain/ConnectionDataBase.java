@@ -11,9 +11,14 @@ public class ConnectionDataBase {
 
     private final static String DRIVER_NAME = "com.mysql.jdbc.Driver";
 
-    private static final String JDBC_CONNECTION = System.getProperty("JDBC_CONNECTION_STRING");
+    /*private static final String JDBC_CONNECTION = System.getProperty("JDBC_CONNECTION_STRING");
     private static final String JDBC_NAME = System.getProperty("USERNAME");
-    private static final String JDBC_PASS = System.getProperty("PASSWORD");
+    private static final String JDBC_PASS = System.getProperty("PASSWORD");*/
+
+
+    private static final String JDBC_CONNECTION = "jdbc:mysql://visual.c1c6yr1ogomc.us-west-2.rds.amazonaws.com:3306";
+    private static final String JDBC_NAME = "admin";
+    private static final String JDBC_PASS = "adminadmin";
 
     public static Connection getConnection() {
         Connection connection = null;

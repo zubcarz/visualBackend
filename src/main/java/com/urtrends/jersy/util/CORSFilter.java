@@ -1,14 +1,14 @@
 package com.urtrends.jersy.util;
 
-/**
- * Created by ZUBCARZ on 12/6/2016.
- */
-
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerResponse;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
 
 import javax.ws.rs.ext.Provider;
+
+/**
+ * Created by ZUBCARZ on 5/17/2016.
+ */
 @Provider
 public class CORSFilter implements ContainerResponseFilter {
 
