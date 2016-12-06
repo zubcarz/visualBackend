@@ -1,50 +1,48 @@
 package com.urtrends.jersy.domain.implement;
 
+import com.urtrends.jersy.domain.dao.DaoPathActivity;
+import com.urtrends.jersy.model.PathActivity;
 import com.urtrends.jersy.domain.ConnectionDataBase;
-import com.urtrends.jersy.domain.dao.DaoGrid;
-import com.urtrends.jersy.domain.dao.DaoProfile;
-import com.urtrends.jersy.model.Grid;
-import com.urtrends.jersy.model.Profile;
-import com.urtrends.jersy.model.Socialnetwork;
 
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
 
 /**
- * Created by ZUBCARZ on 2/27/2016.
+ * Created by ZUBCARZ on 12/6/2016.
  */
-public class ImplementGrid implements DaoGrid {
+public class ImplementPathActivity implements DaoPathActivity{
 
-    public List<Grid> getGrid(int limit) {
-        List<Grid> grids = new ArrayList<Grid>();
+
+    public List<PathActivity> selectAll() {
+
+        List<PathActivity> response= new ArrayList<PathActivity>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+
         try {
+            List<PathActivity> PathActivities = new ArrayList<PathActivity>();
 
             connection = (Connection) ConnectionDataBase.getConnection();
-            preparedStatement = connection.prepareCall("{call URCORETRENDS.sp_get_whats_news(?)}");
-            preparedStatement.setInt(1, limit);
-            resultSet = preparedStatement.executeQuery();
-
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM `schema`.wbsnames";
+            resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                Grid grid = new Grid();
-                grid.setId(resultSet.getLong("id"));
-                grid.setUsername(resultSet.getString("username"));
-                grid.setBio(resultSet.getString("bio"));
-                grid.setFeature(resultSet.getString("feature"));
-                grid.setWebsite(resultSet.getString("website"));
-                grid.setUrlphoto(resultSet.getString("urlPhoto"));
-                grids.add(grid);
+                PathActivity pathActivity = new PathActivity();
+                pathActivity.setWBSName(resultSet.getString("WBSName"));
+                pathActivity.setWBSPadre(resultSet.getString("WBSPadre"));
+                pathActivity.setWBSPath(resultSet.getString("WBSPath"));
+                PathActivities.add(pathActivity);
             }
 
-
+            response = PathActivities;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -69,9 +67,7 @@ public class ImplementGrid implements DaoGrid {
                     e.printStackTrace();
                 }
             }
+            return response;
         }
-
-        return grids;
-
     }
 }

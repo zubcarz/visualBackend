@@ -5,12 +5,8 @@
 package com.urtrends.jersy;
 
 import com.google.gson.Gson;
-import com.urtrends.jersy.domain.implement.ImplementGrid;
-import com.urtrends.jersy.domain.implement.ImplementProfile;
-import com.urtrends.jersy.domain.implement.ImplementUser;
-import com.urtrends.jersy.model.Grid;
-import com.urtrends.jersy.model.Profile;
-import com.urtrends.jersy.model.User;
+import com.urtrends.jersy.domain.implement.*;
+import com.urtrends.jersy.model.*;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -31,7 +27,6 @@ public class Services {
     public Response messageSuccess(@QueryParam("userId") Long idUser)
             throws ClassNotFoundException, SQLException {
         try {
-
             String out = "{state : 'successful'}";
             return Response.ok(out, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
@@ -40,6 +35,61 @@ public class Services {
         }
     }
 
+    @GET
+    @Path("/path-activity")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPathActivity()
+            throws ClassNotFoundException, SQLException {
+        try {
+            ImplementPathActivity implementPathActivity = new ImplementPathActivity();
+            List<PathActivity> pathActivities = implementPathActivity.selectAll();
+            Gson gson = new Gson();
+            String out = gson.toJson(pathActivities);
+            return Response.ok(out, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().entity("internal service error : " + e).build();
+        }
+    }
+
+    @GET
+    @Path("/earned-value")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEarnedValue(@QueryParam("wsPath") String wsPath,
+                                   @QueryParam("type") String type,
+                                   @QueryParam("start") String start,
+                                   @QueryParam("end") String end)
+            throws ClassNotFoundException, SQLException {
+        try {
+            ImplementActivity implementActivity = new ImplementActivity();
+            List<Activity> activities = implementActivity.getEarnedValue(wsPath,type,start,end);
+            Gson gson = new Gson();
+            String out = gson.toJson(activities);
+            return Response.ok(out, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().entity("internal service error : " + e).build();
+        }
+    }
+
+    @GET
+    @Path("/earned-value-type")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEarnedValueType(@QueryParam("date") String date,
+                                       @QueryParam("wsPath") String wsPath,
+                                       @QueryParam("type") String type)
+            throws ClassNotFoundException, SQLException {
+        try {
+            ImplementActivity implementActivity = new ImplementActivity();
+            List<Activity> activities = implementActivity.getEarnedValueByItem(date,wsPath,type);
+            Gson gson = new Gson();
+            String out = gson.toJson(activities);
+            return Response.ok(out, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().entity("internal service error : " + e).build();
+        }
+    }
 
     @GET
     @Path("/getUser")

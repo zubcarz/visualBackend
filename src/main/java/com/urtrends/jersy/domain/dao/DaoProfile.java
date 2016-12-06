@@ -1,7 +1,6 @@
 package com.urtrends.jersy.domain.dao;
 
 import com.urtrends.jersy.model.Profile;
-
 import java.util.List;
 
 /**
